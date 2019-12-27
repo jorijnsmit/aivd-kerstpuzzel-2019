@@ -21,8 +21,8 @@ def shift_all(bids):
 
 def mutate(bids, redist=0.5, shift=0.05):
     """mutate a list of bids using given thresholds"""
-    if np.random.random() > redist:
+    if np.random.random() < redist:
         bids = redist_points(bids)
-    if np.random.random() > shift:
+    if np.random.random() < shift:
         bids = shift_all(bids)
     return bids
