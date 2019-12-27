@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 
 from genetic_algorithms import mutate
+from population import *
+
 
 def run_tournament(bids):
     scores = [0 for i in range(len(bids))]
@@ -21,27 +23,17 @@ def run_tournament(bids):
                 t = bids[i]
                 bids[i] = bids[j]
                 bids[j] = t
-    for i in range(min(5, len(bids))):
-        #print (bids[i], scores[i])
-        winner = bids[0], scores[0]
-    for i in range(len(bids)):
-        bids[i] = mutate(bids[i])
-    return bids, winner
+    return bids[0], scores[0]
 
-
-def checksum(bids):
-    df = pd.DataFrame(bids)
-    assert df.sum(axis=1).max() == df.sum(axis=1).min() == 100
-    assert len(df.columns) == 10
-    assert df.min().min() >= 0
-    return True
-
+POPULATION = populate(1000)
 CHAMPION = [], 0
-egbids = pd.read_csv('archetypes.csv', header=None).values.tolist()
 
 for n in range(1000):
-    checksum(egbids)
-    egbids, winner = run_tournament(egbids)
+    print(f'{n}.', end='')
+    checksum(POPULATION)
+    winner = run_tournament(POPULATION)
     if CHAMPION[-1] < winner[-1]:
         CHAMPION = winner
-        print(f'new champion: {CHAMPION}')
+        print(f'\nnew champion in round {n}: {CHAMPION}')
+    for i, _ in enumerate(POPULATION):
+        POPULATION[i] = mutate(POPULATION[i], redist=0.05)
