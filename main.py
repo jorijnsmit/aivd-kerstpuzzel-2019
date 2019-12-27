@@ -22,11 +22,11 @@ def run_tournament(bids):
                 bids[i] = bids[j]
                 bids[j] = t
     for i in range(min(5, len(bids))):
-        print (bids[i], scores[i])
-    print()
+        #print (bids[i], scores[i])
+        winner = bids[0], scores[0]
     for i in range(len(bids)):
         bids[i] = mutate(bids[i])
-    return bids
+    return bids, winner
 
 
 def checksum(bids):
@@ -36,9 +36,12 @@ def checksum(bids):
     assert df.min().min() >= 0
     return True
 
-
+CHAMPION = [], 0
 egbids = pd.read_csv('archetypes.csv', header=None).values.tolist()
 
-for n in range(10):
+for n in range(1000):
     checksum(egbids)
-    egbids = run_tournament(egbids)
+    egbids, winner = run_tournament(egbids)
+    if CHAMPION[-1] < winner[-1]:
+        CHAMPION = winner
+        print(f'new champion: {CHAMPION}')
