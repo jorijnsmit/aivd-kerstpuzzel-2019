@@ -29,3 +29,5 @@ egbids.append([0, 0, 0, 0, 0, 0, 25, 25, 25, 25])
 egbids.append([1, 11, 11, 11, 11, 11, 11, 11, 11, 11])
 egbids.append([25, 0, 0, 0, 0, 0, 0, 0, 25, 25, 25])
 egbids.append([1, 3, 5, 7, 9, 11, 13, 15, 17, 19])
+
+# just a comment
