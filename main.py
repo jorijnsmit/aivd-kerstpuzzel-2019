@@ -29,7 +29,7 @@ POPULATION = populate(1000)
 CHAMPION = [], 0
 
 for n in range(1000):
-    print(f'{n}.', end='')
+    print(f'{n}.', end='', flush=True)
     checksum(POPULATION)
     winner = run_tournament(POPULATION)
     if CHAMPION[-1] < winner[-1]:
