@@ -45,3 +45,5 @@ for n in range(1000):
     if CHAMPION[-1] < winner[-1]:
         CHAMPION = winner
         print(f'new champion: {CHAMPION}')
+
+#TODO: fix 'new champion' condition
