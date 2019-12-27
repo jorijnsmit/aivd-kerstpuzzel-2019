@@ -1,3 +1,5 @@
+import numpy as np
+
 def run_tournament(bids):
     scores = [0 for i in range(len(bids))]
     for i in range(len(bids) - 1):
@@ -30,4 +32,18 @@ egbids.append([1, 11, 11, 11, 11, 11, 11, 11, 11, 11])
 egbids.append([25, 0, 0, 0, 0, 0, 0, 0, 25, 25, 25])
 egbids.append([1, 3, 5, 7, 9, 11, 13, 15, 17, 19])
 
-# just a comment
+def mutate_bid(li):
+    new_li = []
+    for bid in li:
+        new_bid = bid + np.random.randint(-1, 1)
+        new_li.append(new_bid)
+    return new_li
+
+run_tournament(egbids)
+
+# test mutator
+mutate_bid(egbids[3])
+
+# todo
+# make checksum function that makes sure sum == 100
+#                             makes sure bid >= 0
