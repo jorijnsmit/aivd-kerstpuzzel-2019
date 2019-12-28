@@ -60,7 +60,7 @@ def evolve(population, generations):
         #plot_individual(df.iloc[0, :10])
         mutators = []
         for individual in selected:
-            mutators.append(mutate(individual, redist=0.5))
+            mutators.append(mutate(individual))
         selected.extend(mutators)
         population = selected
     return population
