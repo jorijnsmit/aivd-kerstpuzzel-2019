@@ -1,6 +1,7 @@
 # thanks to
 # https://towardsdatascience.com/continuous-genetic-algorithm-from-scratch-with-python-ff29deedd099
 
+import pandas as pd
 import numpy as np
 import matplotlib.pylab as plt
 import seaborn as sns
@@ -62,4 +63,10 @@ def evolve(population, generations):
             mutators.append(mutate(individual))
         selected.extend(mutators)
         population = selected
+    return population
+
+
+def inject_archetypes(population):
+    """inject artificially created individuals"""
+    population.extend(pd.read_csv('archetypes.csv', header=None).values.tolist())
     return population
