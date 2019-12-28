@@ -43,11 +43,14 @@ def plot_individual(indi):
     plt.show()
 
 
-def calc_fitness(indi, pop):
+def calc_fitness(individual, population):
     """calculate the fitness of an individual relative to the rest of the population"""
+    worth = np.arange(1, 11)
     fitness = 0
-    for ix, contestant in pop.iterrows():
-        fitness += ((indi > contestant) * [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).sum()
+    # we ignore the fact that one of the contestants will be the individual itself
+    # since fitness gained from that will be 0 anyway
+    for contestant in population:
+        fitness += ((individual > contestant) * worth).sum()
     return fitness
 
 
