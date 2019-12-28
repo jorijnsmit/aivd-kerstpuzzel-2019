@@ -40,23 +40,22 @@ def selection(population):
     """select the fittest half of the population by advancing
     only individuals that perform above the mean"""
     # still some bug that sometimes makes the selection too small
-    divider = len(population) // 2
+    top = len(population) // 2
     fitness = []
-    selected = []
     for individual in population:
         fitness.append(calc_fitness(individual, population))
-    fit_mean = np.array(fitness).mean()
-    for i, _ in enumerate(population):
-        if fitness[i] >= fit_mean:
-            selected.append(population[i])
-    return selected[:divider]
+    order = np.argsort(fitness)
+    ordered_selected = np.array(population)[order[::-1]]
+    top_ordered_selected = ordered_selected[:top]
+    return top_ordered_selected.tolist()
 
 
 def evolve(population, generations):
     """evolve a population over given amount of generations"""
+    print('gen#\tchampion')
     for g in range(generations):
         selected = selection(population)
-        print(f'{g}\t{selected[0]}')
+        print(f'{g}\t{np.array(selected[0])}')
         #plot_individual(df.iloc[0, :10])
         mutators = []
         for individual in selected:
