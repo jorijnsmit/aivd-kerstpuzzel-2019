@@ -17,7 +17,7 @@ def redist_points(bids):
 
 
 def redist_one_point(bids):
-    """move random amount of points to an envelope next to it"""
+    """move one point to an envelope next to it"""
     envelope = np.random.randint(0, len(bids))
     if bids[envelope] > 0:
         bids[envelope] -= 1
