@@ -1,33 +1,15 @@
-import math
+# thanks to
+# https://towardsdatascience.com/continuous-genetic-algorithm-from-scratch-with-python-ff29deedd099
 
 import numpy as np
-import pandas as pd
 import matplotlib.pylab as plt
 import seaborn as sns
 
-def checksum(bids):
-    df = pd.DataFrame(bids)
-    assert df.sum(axis=1).max() == df.sum(axis=1).min() == 100
-    assert len(df.columns) == 10
-    assert df.min().min() >= 0
-    return True
-
-
-def populate(size=100):
-    """initiate population of given size with archetypes"""
-    pop = []
-    for n in range(size // len(pd.read_csv('archetypes.csv', header=None).values.tolist())):
-        pop.extend(pd.read_csv('archetypes.csv', header=None).values.tolist())
-    return pop
-
-
-###
-# https://towardsdatascience.com/continuous-genetic-algorithm-from-scratch-with-python-ff29deedd099
-###
+from genetic_algorithms import mutate
 
 def random_individual(n_genes, gene_sum):
     """create a random individual with n_genes carrying ints which sum to gene_sum"""
-    # https://stackoverflow.com/questions/59148994/how-to-get-n-random-integer-numbers-whose-sum-is-equal-to-m
+    # https://stackoverflow.com/questions/59148994/
     individual = np.random.multinomial(gene_sum, np.ones(n_genes) / n_genes)
     return individual
 
@@ -54,17 +36,31 @@ def calc_fitness(individual, population):
     return fitness
 
 
-def selection(pop):
-    """select the fittest half of the population and make sure it is an even number"""
-    return pop.sort_values('fitness', ascending=False).head(math.ceil(len(pop.index) / 4) * 2)
+def selection(population):
+    """select the fittest half of the population by advancing
+    only individuals that perform above the mean"""
+    # still some bug that sometimes makes the selection too small
+    divider = len(population) // 2
+    fitness = []
+    selected = []
+    for individual in population:
+        fitness.append(calc_fitness(individual, population))
+    fit_mean = np.array(fitness).mean()
+    for i, _ in enumerate(population):
+        if fitness[i] >= fit_mean:
+            selected.append(population[i])
+    return selected[:divider]
 
 
-def mutate_simple(indi):
-    mutating_genes = np.random.randint(0, len(indi)), np.random.randint(0, len(indi))
-    if indi[mutating_genes[0]] > 0 & indi[mutating_genes[1]] < 100:
-        indi[mutating_genes[0]] -= 1
-        indi[mutating_genes[1]] += 1
-    else:
-        mutate_simple(indi)
-    assert indi.sum() == 100
-    return indi
+def evolve(population, generations):
+    """evolve a population over given amount of generations"""
+    for g in range(generations):
+        selected = selection(population)
+        print(f'{g}\t{selected[0]}')
+        #plot_individual(df.iloc[0, :10])
+        mutators = []
+        for individual in selected:
+            mutators.append(mutate(individual, redist=0.5))
+        selected.extend(mutators)
+        population = selected
+    return population
