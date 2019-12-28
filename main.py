@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 
 from genetic_algorithms import mutate
+from population import *
+
 
 def run_tournament(bids):
     scores = [0 for i in range(len(bids))]
@@ -21,29 +23,39 @@ def run_tournament(bids):
                 t = bids[i]
                 bids[i] = bids[j]
                 bids[j] = t
-    for i in range(min(5, len(bids))):
-        #print (bids[i], scores[i])
-        winner = bids[0], scores[0]
-    for i in range(len(bids)):
-        bids[i] = mutate(bids[i])
-    return bids, winner
+    return bids[0], scores[0]
 
-
-def checksum(bids):
-    df = pd.DataFrame(bids)
-    assert df.sum(axis=1).max() == df.sum(axis=1).min() == 100
-    assert len(df.columns) == 10
-    assert df.min().min() >= 0
-    return True
-
+POPULATION = populate(1000)
 CHAMPION = [], 0
-egbids = pd.read_csv('archetypes.csv', header=None).values.tolist()
 
 for n in range(1000):
-    checksum(egbids)
-    egbids, winner = run_tournament(egbids)
+    print(f'{n}.', end='', flush=True)
+    checksum(POPULATION)
+    winner = run_tournament(POPULATION)
     if CHAMPION[-1] < winner[-1]:
         CHAMPION = winner
+<<<<<<< HEAD
         print(f'new champion: {CHAMPION}')
 
 #TODO: fix 'new champion' condition
+=======
+        print(f'\nnew champion in round {n}: {CHAMPION}')
+    for i, _ in enumerate(POPULATION):
+        POPULATION[i] = mutate(POPULATION[i], redist=0.05)
+
+def population_loop():
+    # sloooooooow
+    # nog teveel computaties in pandas ipv numpy
+    df = pd.DataFrame(random_population(100, 10, 100))
+    #df = df.append([[2, 2, 2, 2, 2, 2, 12, 22, 27, 27]])
+    df.columns = ['gene 1', 'gene 2', 'gene 3', 'gene 4', 'gene 5', 'gene 6', 'gene 7', 'gene 8', 'gene 9', 'gene 10']
+
+    for n in range(1000):
+        df['fitness'] = df.apply(calc_fitness, args=(df, ), axis=1, raw=True)
+        df = selection(df)
+        df.pop('fitness')
+        print(n, df.iloc[0].tolist())
+        df = df.append(df.apply(mutate_simple, axis=1, raw=True), ignore_index=True)
+
+    plot_individual(df.iloc[0,:10])
+>>>>>>> 947b4c67b89b96d86167574fb642c42907404594
