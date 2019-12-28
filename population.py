@@ -48,7 +48,7 @@ def selection(population):
     order = np.argsort(fitness)
     ordered_selected = np.array(population)[order[::-1]]
     top_ordered_selected = ordered_selected[:top]
-    return top_ordered_selected.tolist()
+    return [np.array(l) for l in top_ordered_selected.tolist()]
 
 
 def evolve(population, generations):
