@@ -44,4 +44,4 @@ def mutate(bid, redist=0.5, swap=0.5, shift=0.1):
         bid = swap_values(bid)
     if np.random.random() < shift:
         bid = shift_all(bid)
-    return bid
+    return np.array(bid)
