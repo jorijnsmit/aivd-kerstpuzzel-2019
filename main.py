@@ -34,14 +34,11 @@ for n in range(1000):
     winner = run_tournament(POPULATION)
     if CHAMPION[-1] < winner[-1]:
         CHAMPION = winner
-<<<<<<< HEAD
-        print(f'new champion: {CHAMPION}')
-
-#TODO: fix 'new champion' condition
-=======
         print(f'\nnew champion in round {n}: {CHAMPION}')
     for i, _ in enumerate(POPULATION):
         POPULATION[i] = mutate(POPULATION[i], redist=0.05)
+
+redist_points([1,1,1,1,1,1,1,1,1,1])
 
 def population_loop():
     # sloooooooow
@@ -58,4 +55,3 @@ def population_loop():
         df = df.append(df.apply(mutate_simple, axis=1, raw=True), ignore_index=True)
 
     plot_individual(df.iloc[0,:10])
->>>>>>> 947b4c67b89b96d86167574fb642c42907404594
