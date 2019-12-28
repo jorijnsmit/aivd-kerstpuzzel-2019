@@ -53,7 +53,7 @@ def selection(population):
 
 def evolve(population, generations):
     """evolve a population over given amount of generations"""
-    print('gen#\tchampion')
+    print('#\t[c h a m p i o n \' s   g e n e]')
     for g in range(generations):
         selected = selection(population)
         print(f'{g}\t{np.array(selected[0])}')
