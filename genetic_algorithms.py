@@ -4,13 +4,12 @@ def redist_points(bid):
     """move single point to adjacent envelope"""
     env = np.random.randint(0, 10)
     if bid[env] == 0:
-        redist_points(bid)
+        return redist_points(bid)
+    bid[env] -= 1
+    if np.random.randint(0, 1) == 0:
+        bid[(env + 9) % 10] += 1
     else:
-        bid[env] -= 1
-        if np.random.randint(0, 1) == 0:
-            bid[(env + 9) % 10] += 1
-        else:
-            bid[(env + 1) % 10] += 1
+        bid[(env + 1) % 10] += 1
     return bid
 
 
