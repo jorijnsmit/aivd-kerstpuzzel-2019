@@ -1,4 +1,12 @@
-# aivd-kerstpuzzel-2019
+# AIVD Christmas Puzzle 2019 (Assignment 8)
+
+To test whether assignment 8 of the AIVD Christmas puzzle 2019 had a Nash equilibrium, we wrote a genetic algorithm from scratch in Python to simulate a population of other participants.
+
+After 2000 generations out of a population of 1500, we found:
+- no equilibrium was reached
+- the average of all winners of each generation was (almost) a linear increase across the envelopes (`[1, 3, 5, 7, 9, 11, 13, 15, 17, 19]`)
+- a winning strategy should at least be able to beat this average
+- this assignment is at least just as psychological as it is mathematical!
 
 ```
 >>> df.describe()
@@ -12,3 +20,7 @@ min       0.00000     0.000000     0.000000     0.000000     0.000000     0.0000
 75%       2.00000     4.000000     8.000000    11.000000    14.000000    17.00000    20.000000    23.000000    26.000000    26.000000
 max       7.00000    10.000000    13.000000    18.000000    21.000000    25.00000    29.000000    33.000000    36.000000    37.000000
 ```
+
+# Authors
+- Jorijn Smit ([@jorijnsmit](https://github.com/jorijnsmit/))
+- Maarten Smit ([@bakmaaier](https://github.com/bakmaaier/)) 
