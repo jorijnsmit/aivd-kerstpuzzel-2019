@@ -6,7 +6,7 @@ After 2000 generations out of a population of 1500, we found:
 - no equilibrium was reached
 - the average of all winners of each generation was (almost) a linear increase across the envelopes (`[1, 3, 5, 7, 9, 11, 13, 15, 17, 19]`)
 - a winning strategy should at least be able to beat this average
-- this assignment is at least just as psychological as it is mathematical!
+- this assignment is just as psychological as it is mathematical!
 
 Results have not been published yet.
 
