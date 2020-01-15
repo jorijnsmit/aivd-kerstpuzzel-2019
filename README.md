@@ -28,5 +28,6 @@ max       7.00000    10.000000    13.000000    18.000000    21.000000    25.0000
 - Maarten Smit ([@bakmaaier](https://github.com/bakmaaier/))
 
 # References
+- https://www.aivd.nl/onderwerpen/aivd-kerstpuzzel/documenten/publicaties/2019/12/11/aivd-kerstpuzzel-2019-opgaven-en-antwoordformulier
 - Holland, J. H. (1992). *Adaptation in natural and artificial systems: an introductory analysis with applications to biology, control, and artificial intelligence*. MIT press. (https://mitpress.mit.edu/books/adaptation-natural-and-artificial-systems)
 - https://en.wikipedia.org/wiki/Nash_equilibrium
