@@ -37,11 +37,10 @@ def calc_fitness(individual, population):
     return fitness
 
 
-def selection(population):
+def selection(population, factor=2):
     """select the fittest half of the population by advancing
     only individuals that perform above the mean"""
-    # still some bug that sometimes makes the selection too small
-    top = len(population) // 2
+    top = len(population) // factor
     fitness = []
     for individual in population:
         fitness.append(calc_fitness(individual, population))
@@ -56,7 +55,7 @@ def evolve(population, generations):
     print('#\t[c h a m p i o n \' s   g e n e]')
     for g in range(generations):
         selected = selection(population)
-        print(f'{g}\t{np.array(selected[0])}')
+        print(f'{g + 1}\t{np.array(selected[0])}')
         #plot_individual(df.iloc[0, :10])
         mutators = []
         for individual in selected:
