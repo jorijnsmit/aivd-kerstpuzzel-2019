@@ -25,7 +25,7 @@ max       7.00000    10.000000    13.000000    18.000000    21.000000    25.0000
 
 # Authors
 - Jorijn Smit ([@jorijnsmit](https://github.com/jorijnsmit/))
-- Maarten Smit ([@bakmaaier](https://github.com/bakmaaier/))
+- Maarten Smit ([@maarten-smit](https://github.com/maarten-smit/))
 
 # References
 - https://www.aivd.nl/onderwerpen/aivd-kerstpuzzel/documenten/publicaties/2019/12/11/aivd-kerstpuzzel-2019-opgaven-en-antwoordformulier
